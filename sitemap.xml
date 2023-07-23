@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.vreteam.eu.org/vr/46815.html</loc>
+    
+    <lastmod>2023-07-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.vreteam.eu.org/404.html</loc>
     
     <lastmod>2023-07-22</lastmod>
@@ -38,24 +47,6 @@
   </url>
   
   <url>
-    <loc>https://www.vreteam.eu.org/vr/46815.html</loc>
-    
-    <lastmod>2023-07-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.vreteam.eu.org/about/index.html</loc>
-    
-    <lastmod>2020-07-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.vreteam.eu.org/archives/index.html</loc>
     
     <lastmod>2020-07-01</lastmod>
@@ -66,6 +57,15 @@
   
   <url>
     <loc>https://www.vreteam.eu.org/categories/index.html</loc>
+    
+    <lastmod>2020-07-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.vreteam.eu.org/about/index.html</loc>
     
     <lastmod>2020-07-01</lastmod>
     
