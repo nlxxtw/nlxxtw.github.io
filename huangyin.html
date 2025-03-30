@@ -1,0 +1,72 @@
+<div class="container fluid-widget">  
+    <div class="zib-widget widget_block">  
+        <style>  
+            .text-center {  
+                text-align: center; /* 默认居中 */  
+            }  
+            /* PC端样式 */  
+            @media (min-width: 768px) {  
+                .text-center {  
+                    text-align: center; /* PC端居中 */  
+                }  
+            }  
+            /* 手机端样式 */  
+            @media (max-width: 767px) {  
+                .text-center {  
+                    text-align: left; /* 手机端居左 */  
+                }  
+            }  
+        </style>  
+        <div class="text-center">  
+            <span style="color: red">  
+                <i class="fa fa-bullhorn"></i>  
+                <span id="weatherInfo"></span>  
+            </span>  
+        </div>  
+    </div>  
+</div>  
+
+<script>  
+document.addEventListener("DOMContentLoaded", function() {  
+    fetchWeatherData();  
+
+    function fetchWeatherData() {  
+        // 使用 AJAX 请求获取天气信息  
+        fetch('https://www.zddown.icu/wp-content/themes/zibll/inc/weather-api.php?type=json')  
+            .then(response => response.json())  
+            .then(data => {  
+                if (data.code === 200) {                     const province =
+											data.data.province;  
+                    const city = data.data.city;  
+									const ip = data.data.ip;  
+                    const weather = data.data.weather.weather; // 当前天气  
+                    const temp = parseInt(data.data.weather.temp); // 当前温度  
+                    const lowTemp = parseInt(data.data.weather.temp) - 5; // 假设低温为当前温度减5  
+                    const highTemp = parseInt(data.data.weather.temp) + 10; // 假设高温为当前温度加10  
+                    const dayOfWeek = new Date().toLocaleString('zh-CN', { weekday: 'long' }); // 获取中文星期  
+                    const currentDate = new Date().toLocaleDateString(); // 获取当前日期  
+
+                    // 判断温度是否舒适  
+                    let comfortMessage = '';  
+                    if (temp < 20) {  
+                        comfortMessage = '现在的温度有点凉，建议穿暖和点 ';  
+                    } else if (temp >= 20 && temp <= 25) {  
+                        comfortMessage = '现在的温度比较舒适~可以适当运动';  
+                    } else {  
+                        comfortMessage = '现在的温度有点热，小心中暑哈';  
+                    }  
+
+                    // 格式化天气信息  
+                    const weatherInfo = `你好，来自${province}${city}【IP:${ip}】的朋友，今天是${currentDate} ${dayOfWeek}，天气${weather}，低温${lowTemp}°C，高温${highTemp}°C，${comfortMessage}`;  
+                    document.getElementById('weatherInfo').innerText = weatherInfo;  
+                } else {  
+                    document.getElementById('weatherInfo').innerText = "你不会是国外友人吧？（You're not going to be a foreign friend, are you?）";  
+                }  
+            })  
+            .catch(error => {  
+                console.error('获取天气信息时发生错误：', error);  
+                document.getElementById('weatherInfo').innerText = "获取天气信息时发生错误";  
+            });  
+    }  
+});  
+</script>

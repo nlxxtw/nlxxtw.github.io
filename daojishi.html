@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- 基础安全版本，避免使用高级特性 -->
+<style>
+.countdown-container {
+    padding: 2rem;
+    background: #2c3e50;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.countdown-number {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    color: #e74c3c;
+}
+
+.quote-text {
+    font-size: 1.2rem;
+    min-height: 60px;
+    padding: 10px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+</style>
+
+<div class="countdown-container">
+    <h2>距离全国事业单位考试只剩</h2>
+    <div class="countdown-number" id="days">--</div>
+    <div class="quote-text" id="quote">初始化中...</div>
+</div>
+
+<script>
+// 调试模式开关
+const DEBUG_MODE = true;
+
+// 基础配置
+const CONFIG = {
+    examDate: '2025-3-29',
+    apiUrl: 'https://v1.hitokoto.cn/?c=d&encode=text',
+    fallback: [ "没有横空出世的幸运，只有不为人知的努力",
+    "你触摸到的每一个知识点，都在重塑未来的自己",
+							"逆风的方向更适合飞翔——五月天《倔强》",
+    "备考就像在黑屋子里洗衣服，灯光亮起时自见分晓",
+    "今日披星戴月，明日成就梦想｜每日学习进度+1%",
+    "你背不下来的书，总有人能背下来｜共勉",
+    "凌晨的星光很刺眼，但早起的你特别耀眼✨",
+    "错题本减少的速度，就是你进步的速度",
+    "书页翻动的声响，是梦想靠近的声音",
+    "你的名字这么好听，应该出现在录取通知书上",
+    "当觉得困难时——正是你接近目标的证明",
+    "笔尖与纸张的每寸接触，都在重塑未来的模样",
+    "每个深夜的坚持，都是对梦想的深情告白"]
+};
+
+// 调试输出
+function debugLog(message) {
+    if(DEBUG_MODE) console.log('[DEBUG]', new Date().toLocaleTimeString(), message);
+}
+// 核心倒计时函数
+function updateTimer() {
+    try {
+        const target = new Date(CONFIG.examDate);
+        const now = new Date();
+        
+        if(isNaN(target)) throw new Error('日期格式错误');
+        
+        const diff = target - now;
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        
+        document.getElementById('days').textContent = days > 0 ? days : '0';
+        debugLog(`倒计时更新成功: ${days}天`);
+    } catch (error) {
+        console.error('倒计时错误:', error);
+        document.getElementById('days').textContent = 'ERR';
+    }
+}
+
+// 获取语录
+async function getQuote() {
+    try {
+        const response = await fetch(CONFIG.apiUrl);
+        if(!response.ok) throw new Error('API响应异常');
+        const data = await response.json();
+        document.getElementById('quote').textContent = data.content || data.quote;
+        debugLog('API语录获取成功');
+    } catch (error) {
+        document.getElementById('quote').textContent = 
+            CONFIG.fallback[Math.floor(Math.random() * CONFIG.fallback.length)];
+        debugLog(`使用备用语录: ${error.message}`);
+    }
+}
+
+	
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    debugLog('脚本开始加载');
+    updateTimer();
+    setInterval(updateTimer, 1000);
+    getQuote();
+});
+	
+// 兼容性垫片
+if (!window.fetch) {
+    document.getElementById('quote').textContent = "您的浏览器需要更新以支持完整功能";
+    debugLog('检测到旧版浏览器，已降级运行');
+}
+	
+	// 智能语句分配算法
+function getDailyInspiration() {
+    const startDate = new Date('2024-01-01'); // 设置起始日期
+    const today = new Date();
+    const diffDays = Math.floor((today - startDate) / (86400000));
+    const index = diffDays % inspirations.length;
+    
+    // 添加节日彩蛋
+    const monthDay = (today.getMonth()+1) + '-' + today.getDate();
+    const specialDays = {
+        '3-15': '🎉高考加油！愿你合上笔盖的刹那，有侠客收剑入鞘的骄傲',
+        '9-10': '📚教师节特别寄语：教育是点燃火焰，而你正让这火焰愈发耀眼',
+        '12-25': '🎄圣诞特别提醒：最好的礼物是明年此刻的录取通知书'
+    };
+    
+    return specialDays[monthDay] || inspirations[index];
+}
+</script>
