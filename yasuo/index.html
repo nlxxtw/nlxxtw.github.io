@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片批量压缩工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>图片批量压缩工具</h1>
+        <p>本网站完全是离线操作，你可以打开网站后断网（拔网线或开飞行模式）进行图片压缩</p>
+        
+        <div class="upload-container">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" fill="#666"/>
+                    </svg>
+                </div>
+                <div class="upload-text">
+                    拖放图片到这里<br>或<br>
+                    <label for="fileInput" class="file-label">选择全部图片</label>
+                    <input type="file" id="fileInput" accept="image/*" multiple class="file-input">
+                </div>
+            </div>
+        </div>
+        
+        <div class="compression-options">
+            <h2>压缩选项</h2>
+            <div class="option-group">
+                <label for="quality">质量 (1-100):</label>
+                <input type="range" id="quality" min="1" max="100" value="100">
+                <span id="qualityValue">80</span>
+            </div>
+            <div class="option-group">
+                <label for="maxWidth">最大宽度 (像素):</label>
+                <input type="number" id="maxWidth" min="100" max="4000" value="1920">
+            </div>
+            <div class="option-group">
+                <label for="outputFormat">输出格式:</label>
+                <select id="outputFormat">
+                    <option value="jpeg">JPEG</option>
+                    <option value="png">PNG</option>
+                    <option value="webp">WebP</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="preview-container" id="previewContainer">
+            <!-- 预览区域将通过JavaScript动态生成 -->
+        </div>
+        
+        <div class="action-buttons">
+            <button id="compressBtn" class="primary-btn" disabled>压缩所有图片</button>
+            <button id="downloadAllBtn" class="secondary-btn" disabled>下载所有</button>
+        </div>
+    </div>
+    
+    <footer>
+       <p>&copy; <a href="https://bg.19492035.xyz" target="_blank">zdDown</a> 图片压缩工具 | 完全在浏览器中运行，您的图片不会上传至任何服务器</p>
+        
+    </footer>
+    
+    <script src="script.js"></script>
+         
+
+    
+<!-- 固定在右下角的二维码 -->
+<div class="fixed-qrcode">
+  <div class="qr-group">
+    <!-- 微信 -->
+    <div>
+      <img src="https://img.19492035.xyz/file/1742989667091.png" width="80">
+      <div style="font-size:12px;color:#666">请作者喝咖啡</div>
+    </div>
+    
+    <!-- 支付宝 -->
+    <div>
+      <img src="https://img.19492035.xyz/file/1743351194450.jpg" width="80">
+      <div style="font-size:12px;color:#666">微信公众号</div>
+    </div>
+    
+  
+<style>
+.fixed-qrcode {
+  position: fixed;  /* 关键定位属性 */
+  bottom: 15px;     /* 距离底部间距 */
+  right: 15px;      /* 距离右侧间距 */
+}
+
+.qr-group {
+  display: flex;
+  gap: 15px;        /* 二维码间距 */
+}
+
+.qr-group img {
+  height: auto;     /* 保持图片比例 */
+  display: block;   /* 消除图片间隙 */
+}
+</style>
+        
+</body>
+</html>   
