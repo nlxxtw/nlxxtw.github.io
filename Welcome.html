@@ -46,17 +46,19 @@
             white-space: nowrap;
             overflow: visible;
         }
-        .announcement p {
-            color: red;
-            display: inline-block;
-            font-family: 微軟正黑體;
-            font-size: 18px;
-            line-height: 1.5;
-            width: auto;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-right: 40px;
+       .announcement p {
+        color: red;
+        display: inline-block;
+        font-family: 微軟正黑;
+        font-size: 18px;
+        font-weight: bold; /* 添加这行使字体加粗 */
+        line-height: 1.5;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 40px;
+        text-shadow: none; /* 确保没有阴影 */
         }
         .announcement span {
             background: url(logo.png);
