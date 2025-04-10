@@ -16,11 +16,59 @@
             overflow: hidden;
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(145deg, #3445db ,#3445db); /* 深海蓝渐变 */
-            /* 原#1a1a1a, #2d2d2d 改为蓝色系 */
-            color: #fff; /* 字体改为白色 */
+            color: #fff;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
+        }
+
+        /* 公告跑马灯样式 */
+        .announcement {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .wrap {
+            position: relative;
+            width: 100%;
+        }
+        .heart {
+            display: block;
+            overflow: hidden;
+        }
+        .scroller {
+            display: block;
+            width: 100%;
+            white-space: nowrap;
+            overflow: visible;
+        }
+        .announcement p {
+            color: red;
+            display: inline-block;
+            font-family: 微軟正黑體;
+            font-size: 18px;
+            line-height: 1.5;
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 40px;
+        }
+        .announcement span {
+            background: url(logo.png);
+            border-radius: 25px;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: .5em;
+            max-width: 100%; 
+            position: absolute;
+            top: 3px;
+            left: -30px;
         }
 
         /* 主容器 */
@@ -31,12 +79,13 @@
             justify-content: flex-start;
             max-width: 700px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             transition: transform 0.3s ease;
             text-align: center;
-            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
         }
 
         /* 标题样式 */
@@ -54,7 +103,7 @@
         .loading-spinner {
             width: 60px;
             height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.2); /* 白色边框 */
+            border: 5px solid rgba(255, 255, 255, 0.2);
             border-top: 5px solid #3498db;
             border-radius: 50%;
             animation: spin 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
@@ -71,14 +120,14 @@
             font-size: 1.5rem;
             line-height: 1.8;
             transition: transform 0.3s ease, opacity 0.3s ease;
-            color: rgba(255, 255, 255, 0.9); /* 白色文字 */
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .welcome-message b {
             font-family: 'Roboto', sans-serif;
             font-weight: 700;
             color:  #ff4444;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 加强阴影 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         /* IP 地址样式 */
@@ -86,7 +135,7 @@
             filter: blur(8px);
             transition: filter 0.3s ease, color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
-            color: rgba(255, 25, 0, 0.8); /* 半透明红色 */
+            color: rgba(255, 25, 0, 0.8);
         }
 
         .ip-address:hover {
@@ -98,7 +147,7 @@
         /* 错误信息 */
         .error-message {
             font-family: 'Roboto', sans-serif;
-            color: #ff4d4d; /* 亮红色 */
+            color: #ff4d4d;
             font-size: 1.2rem;
             font-weight: bold;
         }
@@ -111,7 +160,7 @@
             font-size: 1rem;
             font-weight: 600;
             color: #fff;
-            background: linear-gradient(45deg, rgba(14, 207, 254, 0.8), rgba(7, 166, 241, 0.8)); /* 半透明渐变 */
+            background: linear-gradient(45deg, rgba(14, 207, 254, 0.8), rgba(7, 166, 241, 0.8));
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -140,10 +189,27 @@
                 height: 50px;
                 border-width: 4px;
             }
+            .announcement p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 公告跑马灯 -->
+    <div class="announcement">
+        <div class="wrap">
+            <marquee scrollamount="8" scrolldelay="60" truespeed="true" loop="true" class="heart">
+                <div class="scroller">
+                    <p><span>&nbsp;</span>公告：</p>
+                    <p><span>&nbsp;</span>这里是zdDown博客，这里汇总收集各类问题，日常增长知识等 </p>
+                    <p><span>&nbsp;</span> CTRL+D 收藏本站永久地址</p>
+                </div>
+            </marquee>
+        </div>
+    </div>
+
+    <!-- 主内容 -->
     <div id="main-container">
         <h1 class="welcome-header"> </h1>
         <div class="loading-spinner" id="loading-spinner"></div>
@@ -152,12 +218,12 @@
             <p>你当前距博主约 <b id="visitor-distance"></b> 公里🍃 </p>
             <p>你的 IP 地址：<b class="ip-address" id="visitor-ip"></b></p>
             <p id="greeting-message"></p>
-           
         </div>
         <div class="error-message" id="error-message" style="display: none;">
             <p>抱歉，无法加载访客信息</p>
         </div>
     </div>
+
     <script>
         // 保持原有JavaScript逻辑不变
         const CONFIG = {
